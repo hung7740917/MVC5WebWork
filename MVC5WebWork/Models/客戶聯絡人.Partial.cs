@@ -3,12 +3,24 @@ namespace MVC5WebWork.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
+    public partial class 客戶聯絡人 : IValidatableObject
     {
+
+        客戶聯絡人Repository repo = RepositoryHelper.Get客戶聯絡人Repository();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (repo.EmailCheck(this.客戶Id, this.Email))
+            {
+                yield return new ValidationResult("此客戶聯絡人Eamil已存在", new string[] { "Email" });
+                yield break;
+            }
+            yield return ValidationResult.Success;
+        }
     }
-    
+
     public partial class 客戶聯絡人MetaData
     {
         [Required]

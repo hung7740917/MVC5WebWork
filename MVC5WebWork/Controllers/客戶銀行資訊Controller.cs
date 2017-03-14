@@ -24,7 +24,7 @@ namespace MVC5WebWork.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱 == search);
+                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(search));
             }
 
             return View(客戶銀行資訊.OrderBy(p => p.Id).ToPagedList(PageNo, 10));

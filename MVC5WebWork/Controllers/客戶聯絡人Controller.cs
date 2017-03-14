@@ -26,7 +26,7 @@ namespace MVC5WebWork.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名 == search);
+                客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名.Contains(search));
             }
 
             return View(客戶聯絡人.OrderBy(p => p.Id).ToPagedList(PageNo, 10));

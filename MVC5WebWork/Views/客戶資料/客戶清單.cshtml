@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MVC5WebWork.Models.客戶清單檢視表>
+
+@{
+    ViewBag.Title = "客戶清單";
+}
+
+<h2>客戶清單</h2>
+
+<form>
+    @Html.TextBox("search")
+    <input type="submit" value="搜尋" class="btn btn-info" />
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.客戶名稱)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.聯絡人數量)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.銀行帳戶數量)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.客戶名稱)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.聯絡人數量)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.銀行帳戶數量)
+        </td>
+    </tr>
+}
+
+</table>

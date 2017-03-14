@@ -7,6 +7,20 @@ namespace MVC5WebWork.Models
 			return new EFUnitOfWork();
 		}		
 		
+		public static 客戶清單檢視表Repository Get客戶清單檢視表Repository()
+		{
+			var repository = new 客戶清單檢視表Repository();
+			repository.UnitOfWork = GetUnitOfWork();
+			return repository;
+		}
+
+		public static 客戶清單檢視表Repository Get客戶清單檢視表Repository(IUnitOfWork unitOfWork)
+		{
+			var repository = new 客戶清單檢視表Repository();
+			repository.UnitOfWork = unitOfWork;
+			return repository;
+		}		
+
 		public static 客戶資料Repository Get客戶資料Repository()
 		{
 			var repository = new 客戶資料Repository();

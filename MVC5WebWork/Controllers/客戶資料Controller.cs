@@ -24,7 +24,7 @@ namespace MVC5WebWork.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                data = data.Where(p => p.客戶名稱 == search);
+                data = data.Where(p => p.客戶名稱.Contains(search));
             }
 
             return View(data.OrderBy(p => p.Id).ToPagedList(PageNo, 10));
@@ -136,6 +136,19 @@ namespace MVC5WebWork.Controllers
             //db.客戶資料.Remove(客戶資料);
             //db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult 客戶清單(string search)
+        {
+            客戶清單檢視表Repository 客戶清單檢視表repo = RepositoryHelper.Get客戶清單檢視表Repository();
+
+            var data = 客戶清單檢視表repo.All().AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                data = data.Where(p => p.客戶名稱.Contains(search));
+            }
+            return View(data.ToList());
         }
 
         //protected override void Dispose(bool disposing)

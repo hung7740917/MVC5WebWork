@@ -3,6 +3,7 @@ namespace MVC5WebWork.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using ValidationAttributes;
 
     [MetadataType(typeof(客戶聯絡人MetaData))]
     public partial class 客戶聯絡人 : IValidatableObject
@@ -12,7 +13,7 @@ namespace MVC5WebWork.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (repo.EmailCheck(this.客戶Id, this.Email))
+            if (repo.EmailCheck(this.Id,this.客戶Id, this.Email))
             {
                 yield return new ValidationResult("此客戶聯絡人Eamil已存在", new string[] { "Email" });
                 yield break;
@@ -41,6 +42,7 @@ namespace MVC5WebWork.Models
         public string Email { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
+        [手機格式驗證(ErrorMessage ="手機格式輸入錯誤")]
         public string 手機 { get; set; }
         
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]

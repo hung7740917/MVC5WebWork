@@ -21,10 +21,11 @@ namespace MVC5WebWork.Models
             entity.IsDelete = true;
         }
 
-        public bool EmailCheck(int 客戶Id,string email)
+        public bool EmailCheck(int Id,int 客戶Id, string email)
         {
-            var data = this.All().Where(p => p.客戶Id == 客戶Id && p.Email == email).Any();
-            if (data)
+            var data = this.All().Where(p => p.客戶Id == 客戶Id && p.Email == email).FirstOrDefault();
+
+            if (data != null && data.Id != Id)
             {
                 return true;
             }

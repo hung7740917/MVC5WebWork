@@ -250,6 +250,7 @@
     <Compile Include="Models\RepositoryHelper.cs">
       <DependentUpon>IRepository.EF6..tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ValidationAttributes\手機格式驗證Attribute.cs" />
     <Compile Include="Models\客戶清單檢視表.cs">
       <DependentUpon>客戶資料.tt</DependentUpon>
     </Compile>

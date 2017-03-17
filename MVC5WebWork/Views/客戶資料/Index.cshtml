@@ -4,7 +4,7 @@
     ViewBag.Title = "客戶資料管理";
 }
 
-<h2>客戶資料</h2>
+<h2>客戶資料 @User.Identity.Name</h2>
 
 <p>
     @Html.ActionLink("新增客戶", "Create") | @Html.ActionLink("客戶清單", "客戶清單")

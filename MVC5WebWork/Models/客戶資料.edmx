@@ -44,6 +44,14 @@
           <Property Name="電話" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="會員資料">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="姓名" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'D:\ASP\MVC5\MVC5WEBWORK\MVC5WEBWORK\APP_DATA\客戶資料.MDF.dbo.客戶清單檢視表' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="客戶清單檢視表">
@@ -84,6 +92,7 @@
           <EntitySet Name="客戶資料" EntityType="Self.客戶資料" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶銀行資訊" EntityType="Self.客戶銀行資訊" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶聯絡人" EntityType="Self.客戶聯絡人" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="會員資料" EntityType="Self.會員資料" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="客戶清單檢視表" EntityType="Self.客戶清單檢視表" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [客戶清單檢視表].[Id] AS [Id], 
@@ -185,6 +194,7 @@
             <End Role="客戶聯絡人" EntitySet="客戶聯絡人" />
           </AssociationSet>
           <EntitySet Name="客戶清單檢視表" EntityType="客戶資料Model.客戶清單檢視表" />
+          <EntitySet Name="會員資料" EntityType="客戶資料Model.會員資料" />
         </EntityContainer>
         <EntityType Name="客戶清單檢視表">
           <Key>
@@ -195,6 +205,14 @@
           <Property Name="客戶名稱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="聯絡人數量" Type="Int32" />
           <Property Name="銀行帳戶數量" Type="Int32" />
+        </EntityType>
+        <EntityType Name="會員資料">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="姓名" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -251,6 +269,15 @@
                 <ScalarProperty Name="聯絡人數量" ColumnName="聯絡人數量" />
                 <ScalarProperty Name="客戶名稱" ColumnName="客戶名稱" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="會員資料">
+            <EntityTypeMapping TypeName="客戶資料Model.會員資料">
+              <MappingFragment StoreEntitySet="會員資料">
+                <ScalarProperty Name="姓名" ColumnName="姓名" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

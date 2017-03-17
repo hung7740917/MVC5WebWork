@@ -29,5 +29,6 @@ namespace MVC5WebWork.Models
         public virtual DbSet<客戶銀行資訊> 客戶銀行資訊 { get; set; }
         public virtual DbSet<客戶聯絡人> 客戶聯絡人 { get; set; }
         public virtual DbSet<客戶清單檢視表> 客戶清單檢視表 { get; set; }
+        public virtual DbSet<會員資料> 會員資料 { get; set; }
     }
 }

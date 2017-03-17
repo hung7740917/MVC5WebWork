@@ -16,7 +16,7 @@ namespace MVC5WebWork
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "會員資料", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

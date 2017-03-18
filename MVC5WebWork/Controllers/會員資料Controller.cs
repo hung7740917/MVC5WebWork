@@ -110,7 +110,7 @@ namespace MVC5WebWork.Controllers
         }
 
         [Authorize]
-        public ActionResult Logout()
+        public ActionResult LogOff()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "會員資料");

@@ -94,18 +94,25 @@ namespace MVC5WebWork.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Edit(int id,FormCollection form)
         {
-            if (ModelState.IsValid)
+            var data = repo.Find(id);
+            if(TryUpdateModel(data,new string[] { "Id", "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email" }))
             {
-                var data = repo.UnitOfWork.Context;
-                data.Entry(客戶資料).State = EntityState.Modified;
                 repo.UnitOfWork.Commit();
-                //db.Entry(客戶資料).State = EntityState.Modified;
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(客戶資料);
+
+            return View(data);
+            //if (ModelState.IsValid)
+            //{
+            //    var data = repo.UnitOfWork.Context;
+            //    data.Entry(客戶資料).State = EntityState.Modified;
+            //    repo.UnitOfWork.Commit();
+            //    //db.Entry(客戶資料).State = EntityState.Modified;
+            //    //db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
         }
 
         // GET: 客戶資料/Delete/5

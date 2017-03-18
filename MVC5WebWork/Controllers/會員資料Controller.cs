@@ -92,18 +92,18 @@ namespace MVC5WebWork.Controllers
             if (ModelState.IsValid)
             {
                 string strAccount = loginVM.Account;
-                string userData = "user";
+                //string userData = "user";
 
                 FormsAuthentication.RedirectFromLoginPage(strAccount, false);
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
-                    strAccount,
-                    DateTime.Now,
-                    DateTime.Now.AddMinutes(30),
-                    false,
-                    userData,
-                    FormsAuthentication.FormsCookiePath);
-                string enTicket = FormsAuthentication.Encrypt(ticket);
-                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, enTicket));
+                //FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                //    strAccount,
+                //    DateTime.Now,
+                //    DateTime.Now.AddMinutes(30),
+                //    false,
+                //    userData,
+                //    FormsAuthentication.FormsCookiePath);
+                //string enTicket = FormsAuthentication.Encrypt(ticket);
+                //Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, enTicket));
                 return RedirectToAction("Index", "客戶資料");
             }
             return View(loginVM);

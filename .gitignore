@@ -243,3 +243,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MVC5WebWork/MVC5WebWork/Content/closedXml.xlsx
+/MVC5WebWork/Content/closedXml.xlsx

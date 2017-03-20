@@ -1,7 +1,8 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-	
+using System.Data.Entity;
+
 namespace MVC5WebWork.Models
 {   
 	public  class 客戶聯絡人Repository : EFRepository<客戶聯絡人>, I客戶聯絡人Repository
@@ -14,6 +15,21 @@ namespace MVC5WebWork.Models
         public override IQueryable<客戶聯絡人> All()
         {
             return base.All().Where(p => false == p.IsDelete);
+        }
+
+        public IQueryable<客戶聯絡人> Get篩選後客戶聯絡人(string SortBy, string search)
+        {
+            var 客戶聯絡人 = this.All().Include(客 => 客.客戶資料).AsQueryable();
+            //var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名.Contains(search));
+            }
+
+            客戶聯絡人 = this.SortBy(SortBy);
+
+            return 客戶聯絡人;
         }
 
         public override void Delete(客戶聯絡人 entity)

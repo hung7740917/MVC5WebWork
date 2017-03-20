@@ -7,7 +7,8 @@
 <h2>客戶聯絡人管理</h2>
 
 <p>
-    @Html.ActionLink("新增客戶聯絡人", "Create")
+    @Html.ActionLink("新增客戶聯絡人", "Create") |
+    <a href="@Url.Action("SaveToExcel","客戶聯絡人", new {FileName = ViewBag.Title, SortBy = ViewBag.SortBy,search = ViewBag.search })">匯出Excel</a>
 </p>
 
 <form>

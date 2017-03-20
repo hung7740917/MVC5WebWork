@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MVC5WebWork.Models;
 using PagedList;
 using System.Web.Security;
+using ClosedXML.Excel;
 
 namespace MVC5WebWork.Controllers
 {
@@ -20,19 +21,47 @@ namespace MVC5WebWork.Controllers
         // GET: 客戶資料
         public ActionResult Index(string SortBy, string search, int PageNo = 1)
         {
-
-            var data = repo.All().AsQueryable();
-
-            if (!String.IsNullOrEmpty(search))
-            {
-                data = data.Where(p => p.客戶名稱.Contains(search));
-            }
-
-            data = repo.SortBy(SortBy);
+            var data = repo.Get篩選後客戶資料(SortBy,search);
 
             ViewBag.search = search;
+            ViewBag.SortBy = SortBy;
+            ViewBag.PageNo = PageNo;
 
             return View(data.ToPagedList(PageNo, 10));
+        }
+
+        public ActionResult SaveToExcel(string FileName, string SortBy, string search, int PageNo = 1)
+        {
+            var data = repo.Get篩選後客戶資料(SortBy, search);
+
+            XLWorkbook xl = new XLWorkbook();
+            var 標籤名稱 = xl.Worksheets.Add(FileName + "清單");
+
+            string[] str = new string[] { "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email" };
+            int colIdx = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                標籤名稱.Cell(1, colIdx).Value = str[i];
+                colIdx++;
+            }
+
+            int rowIdx = 2;
+            foreach (var item in data.ToPagedList(PageNo, 10))
+            {
+                標籤名稱.Cell(rowIdx, 1).Value = item.客戶名稱;
+                標籤名稱.Cell(rowIdx, 2).Value = item.統一編號;
+                標籤名稱.Cell(rowIdx, 3).Value = item.電話;
+                標籤名稱.Cell(rowIdx, 4).Value = item.傳真;
+                標籤名稱.Cell(rowIdx, 5).Value = item.地址;
+                標籤名稱.Cell(rowIdx, 6).Value = item.Email;
+                標籤名稱.Column(rowIdx).AdjustToContents();
+                rowIdx++;
+            }
+
+            xl.SaveAs(Server.MapPath("~/Content/closedXml.xlsx"));
+
+            return File(Server.MapPath("~/Content/" + FileName + "清單.xlsx"), "application /vnd.openxmlformats-officedocument.spreadsheetml.sheet", FileName + ".xlsx");
         }
 
         // GET: 客戶資料/Details/5

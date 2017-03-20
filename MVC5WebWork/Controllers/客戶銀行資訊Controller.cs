@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5WebWork.Models;
 using PagedList;
+using ClosedXML.Excel;
 
 namespace MVC5WebWork.Controllers
 {
@@ -20,16 +21,47 @@ namespace MVC5WebWork.Controllers
         // GET: 客戶銀行資訊
         public ActionResult Index(string SortBy,string search, int PageNo = 1)
         {
-            var 客戶銀行資訊 = 客戶銀行資訊repo.All().Include(客 => 客.客戶資料);
+            var 客戶銀行資訊 = 客戶銀行資訊repo.Get篩選後客戶銀行資訊(SortBy, search);
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(search));
-            }
-
-            客戶銀行資訊 = 客戶銀行資訊repo.SortBy(SortBy);
+            ViewBag.search = search;
+            ViewBag.SortBy = SortBy;
+            ViewBag.PageNo = PageNo;
 
             return View(客戶銀行資訊.ToPagedList(PageNo, 10));
+        }
+
+        public ActionResult SaveToExcel(string FileName, string SortBy, string search, int PageNo = 1)
+        {
+            var 客戶銀行資訊 = 客戶銀行資訊repo.Get篩選後客戶銀行資訊(SortBy, search);
+
+            XLWorkbook xl = new XLWorkbook();
+            var 標籤名稱 = xl.Worksheets.Add(FileName + "清單");
+
+            string[] str = new string[] { "銀行名稱", "銀行代碼", "分行代碼", "帳戶名稱", "帳戶號碼", "客戶名稱" };
+            int colIdx = 1;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                標籤名稱.Cell(1, colIdx).Value = str[i];
+                colIdx++;
+            }
+
+            int rowIdx = 2;
+            foreach (var item in 客戶銀行資訊.ToPagedList(PageNo, 10))
+            {
+                標籤名稱.Cell(rowIdx, 1).Value = item.銀行名稱;
+                標籤名稱.Cell(rowIdx, 2).Value = item.銀行代碼;
+                標籤名稱.Cell(rowIdx, 3).Value = item.分行代碼;
+                標籤名稱.Cell(rowIdx, 4).Value = item.帳戶名稱;
+                標籤名稱.Cell(rowIdx, 5).Value = item.帳戶號碼;
+                標籤名稱.Cell(rowIdx, 6).Value = item.客戶資料.客戶名稱;
+                標籤名稱.Column(rowIdx).AdjustToContents();
+                rowIdx++;
+            }
+
+            xl.SaveAs(Server.MapPath("~/Content/" + FileName + "清單.xlsx"));
+
+            return File(Server.MapPath("~/Content/" + FileName + "清單.xlsx"), "application /vnd.openxmlformats-officedocument.spreadsheetml.sheet", FileName + ".xlsx");
         }
 
         // GET: 客戶銀行資訊/Details/5

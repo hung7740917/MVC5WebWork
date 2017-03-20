@@ -1,7 +1,8 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-	
+using System.Data.Entity;
+
 namespace MVC5WebWork.Models
 {   
 	public  class 客戶銀行資訊Repository : EFRepository<客戶銀行資訊>, I客戶銀行資訊Repository
@@ -14,6 +15,20 @@ namespace MVC5WebWork.Models
         public override IQueryable<客戶銀行資訊> All()
         {
             return base.All().Where(p => false == p.IsDelete);
+        }
+
+        public IQueryable<客戶銀行資訊> Get篩選後客戶銀行資訊(string SortBy, string search)
+        {
+            var 客戶銀行資訊 = this.All().Include(客 => 客.客戶資料);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(search));
+            }
+
+            客戶銀行資訊 = this.SortBy(SortBy);
+
+            return 客戶銀行資訊;
         }
 
         public override void Delete(客戶銀行資訊 entity)

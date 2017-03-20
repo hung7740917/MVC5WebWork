@@ -16,6 +16,20 @@ namespace MVC5WebWork.Models
             return base.All().Where(p => false == p.IsDelete);
         }
 
+        public IQueryable<客戶資料> Get篩選後客戶資料(string SortBy, string search)
+        {
+            var data = this.All().AsQueryable();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                data = data.Where(p => p.客戶名稱.Contains(search));
+            }
+
+            data = this.SortBy(SortBy);
+
+            return data;
+        }
+
         public override void Delete(客戶資料 entity)
         {
             entity.IsDelete = true;

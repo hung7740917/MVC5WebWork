@@ -18,7 +18,7 @@ namespace MVC5WebWork.Controllers
         客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
         // GET: 客戶資料
-        public ActionResult Index(string search, int PageNo = 1)
+        public ActionResult Index(string SortBy, string search, int PageNo = 1)
         {
 
             var data = repo.All().AsQueryable();
@@ -28,7 +28,11 @@ namespace MVC5WebWork.Controllers
                 data = data.Where(p => p.客戶名稱.Contains(search));
             }
 
-            return View(data.OrderBy(p => p.Id).ToPagedList(PageNo, 10));
+            data = repo.SortBy(SortBy);
+
+            ViewBag.search = search;
+
+            return View(data.ToPagedList(PageNo, 10));
         }
 
         // GET: 客戶資料/Details/5

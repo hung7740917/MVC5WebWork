@@ -19,9 +19,9 @@ namespace MVC5WebWork.Controllers
 
 
         // GET: 客戶聯絡人
-        public ActionResult Index(string search, int PageNo = 1)
+        public ActionResult Index(string SortBy,string search, int PageNo = 1)
         {
-            var 客戶聯絡人 = 客戶聯絡人repo.All().Include(客 => 客.客戶資料);
+            var 客戶聯絡人 = 客戶聯絡人repo.All().Include(客 => 客.客戶資料).AsQueryable();
             //var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
 
             if (!String.IsNullOrEmpty(search))
@@ -29,7 +29,9 @@ namespace MVC5WebWork.Controllers
                 客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名.Contains(search));
             }
 
-            return View(客戶聯絡人.OrderBy(p => p.Id).ToPagedList(PageNo, 10));
+            客戶聯絡人 = 客戶聯絡人repo.SortBy(SortBy);
+
+            return View(客戶聯絡人.ToPagedList(PageNo, 10));
         }
 
         // GET: 客戶聯絡人/Details/5

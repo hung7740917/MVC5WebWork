@@ -21,6 +21,62 @@ namespace MVC5WebWork.Models
             entity.IsDelete = true;
         }
 
+        public IQueryable<客戶聯絡人> SortBy(string SortBy)
+        {
+
+            if (SortBy == "+職稱")
+            {
+                return this.All().OrderBy(p => p.職稱);
+            }
+            else if (SortBy == "-職稱")
+            {
+                return this.All().OrderByDescending(p => p.職稱);
+            }
+            if (SortBy == "+姓名")
+            {
+                return this.All().OrderBy(p => p.姓名);
+            }
+            else if (SortBy == "-姓名")
+            {
+                return this.All().OrderByDescending(p => p.姓名);
+            }
+            else if (SortBy == "+Email")
+            {
+                return this.All().OrderBy(p => p.Email);
+            }
+            else if (SortBy == "-Email")
+            {
+                return this.All().OrderByDescending(p => p.Email);
+            }
+            else if (SortBy == "+手機")
+            {
+                return this.All().OrderBy(p => p.手機);
+            }
+            else if (SortBy == "-手機")
+            {
+                return this.All().OrderByDescending(p => p.手機);
+            }
+            else if (SortBy == "+電話")
+            {
+                return this.All().OrderBy(p => p.電話);
+            }
+            else if (SortBy == "-電話")
+            {
+                return this.All().OrderByDescending(p => p.電話);
+            }else if (SortBy == "+客戶名稱")
+            {
+                return this.All().OrderBy(p => p.客戶資料.客戶名稱);
+            }
+            else if (SortBy == "-客戶名稱")
+            {
+                return this.All().OrderByDescending(p => p.客戶資料.客戶名稱);
+            }
+            else
+            {
+                return this.All().OrderBy(p => p.Id);
+            }
+        }
+
         public bool EmailCheck(int Id,int 客戶Id, string email)
         {
             var data = this.All().Where(p => p.客戶Id == 客戶Id && p.Email == email).FirstOrDefault();

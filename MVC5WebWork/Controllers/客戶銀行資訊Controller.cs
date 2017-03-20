@@ -18,7 +18,7 @@ namespace MVC5WebWork.Controllers
         //private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶銀行資訊
-        public ActionResult Index(string search, int PageNo = 1)
+        public ActionResult Index(string SortBy,string search, int PageNo = 1)
         {
             var 客戶銀行資訊 = 客戶銀行資訊repo.All().Include(客 => 客.客戶資料);
 
@@ -27,7 +27,9 @@ namespace MVC5WebWork.Controllers
                 客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(search));
             }
 
-            return View(客戶銀行資訊.OrderBy(p => p.Id).ToPagedList(PageNo, 10));
+            客戶銀行資訊 = 客戶銀行資訊repo.SortBy(SortBy);
+
+            return View(客戶銀行資訊.ToPagedList(PageNo, 10));
         }
 
         // GET: 客戶銀行資訊/Details/5

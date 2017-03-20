@@ -21,6 +21,55 @@ namespace MVC5WebWork.Models
             entity.IsDelete = true;
         }
 
+        public IQueryable<客戶資料> SortBy(string SortBy)
+        {
+
+            if (SortBy == "+客戶名稱")
+            {
+                return this.All().OrderBy(p => p.客戶名稱);
+            }
+            else if (SortBy == "-客戶名稱")
+            {
+                return this.All().OrderByDescending(p => p.客戶名稱);
+            }
+            if (SortBy == "+統一編號")
+            {
+                return this.All().OrderBy(p => p.統一編號);
+            }
+            else if (SortBy == "-統一編號")
+            {
+                return this.All().OrderByDescending(p => p.統一編號);
+            }
+            else if (SortBy == "+電話")
+            {
+                return this.All().OrderBy(p => p.電話);
+            }
+            else if (SortBy == "-電話")
+            {
+                return this.All().OrderByDescending(p => p.電話);
+            }
+            else if (SortBy == "+傳真")
+            {
+                return this.All().OrderBy(p => p.傳真);
+            }
+            else if (SortBy == "-傳真")
+            {
+                return this.All().OrderByDescending(p => p.傳真);
+            }
+            else if (SortBy == "+地址")
+            {
+                return this.All().OrderBy(p => p.地址);
+            }
+            else if (SortBy == "-地址")
+            {
+                return this.All().OrderByDescending(p => p.地址);
+            }
+            else
+            {
+                return this.All().OrderBy(p => p.Id);
+            }
+        }
+
         public string LoginCheck(string account, string password)
         {
 

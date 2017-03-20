@@ -20,22 +20,34 @@
 <table class="table">
     <tr>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+銀行名稱",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.銀行名稱)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-銀行名稱",search = ViewBag.search})">▼</a>
         </th>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+銀行代碼",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.銀行代碼)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-銀行代碼",search = ViewBag.search})">▼</a>
         </th>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+分行代碼",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.分行代碼)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-分行代碼",search = ViewBag.search})">▼</a>
         </th>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+帳戶名稱",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.帳戶名稱)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-帳戶名稱",search = ViewBag.search})">▼</a>
         </th>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+帳戶號碼",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.帳戶號碼)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-帳戶號碼",search = ViewBag.search})">▼</a>
         </th>
         <th>
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "+客戶名稱",search = ViewBag.search })">▲</a>
             @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            <a href="@Url.Action("Index","客戶銀行資訊",new { SortBy = "-客戶名稱",search = ViewBag.search})">▼</a>
         </th>
         <th></th>
     </tr>

@@ -22,6 +22,8 @@ namespace MVC5WebWork.Models
         }
     
         public int Id { get; set; }
+        public string 帳號 { get; set; }
+        public string 密碼 { get; set; }
         public string 客戶名稱 { get; set; }
         public string 統一編號 { get; set; }
         public string 電話 { get; set; }

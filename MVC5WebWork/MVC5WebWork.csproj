@@ -222,7 +222,6 @@
     <Compile Include="Controllers\客戶聯絡人Controller.cs" />
     <Compile Include="Controllers\客戶資料Controller.cs" />
     <Compile Include="Controllers\客戶銀行資訊Controller.cs" />
-    <Compile Include="Controllers\會員資料Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -302,15 +301,6 @@
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\客戶銀行資訊Repository.cs">
-      <DependentUpon>IRepository.EF6..tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\會員資料.cs">
-      <DependentUpon>客戶資料.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\會員資料.Partial.cs">
-      <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\會員資料Repository.cs">
       <DependentUpon>IRepository.EF6..tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -431,9 +421,7 @@
     <Content Include="Views\客戶銀行資訊\Edit.cshtml" />
     <Content Include="Views\客戶銀行資訊\Index.cshtml" />
     <Content Include="Views\客戶資料\客戶清單.cshtml" />
-    <Content Include="Views\會員資料\Register.cshtml" />
-    <Content Include="Views\會員資料\Edit.cshtml" />
-    <Content Include="Views\會員資料\Login.cshtml" />
+    <Content Include="Views\客戶資料\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

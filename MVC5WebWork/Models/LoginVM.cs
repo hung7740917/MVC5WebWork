@@ -11,19 +11,19 @@ namespace MVC5WebWork.Models
 
         [StringLength(15, ErrorMessage = "欄位長度不得大於 15 個字元")]
         [Required]
-        public string Account { get; set; }
+        public string 帳號 { get; set; }
 
         [StringLength(50, ErrorMessage = "欄位長度不得大於 50 個字元")]
         [Required]
-        public string Password { get; set; }
+        public string 密碼 { get; set; }
 
 
 
-        會員資料Repository repo = RepositoryHelper.Get會員資料Repository();
+        客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            string str = repo.LoginCheck(this.Account, this.Password);
+            string str = repo.LoginCheck(this.帳號, this.密碼);
             if (str.Contains("密碼輸入錯誤"))
             {
                 yield return new ValidationResult(str, new string[] { "Password" });

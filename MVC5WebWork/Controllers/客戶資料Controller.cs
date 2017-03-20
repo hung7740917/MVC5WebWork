@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5WebWork.Models;
 using PagedList;
+using System.Web.Security;
 
 namespace MVC5WebWork.Controllers
 {
@@ -57,10 +58,11 @@ namespace MVC5WebWork.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Create(客戶資料 客戶資料)
         {
             if (ModelState.IsValid)
             {
+                //客戶資料.密碼 = FormsAuthentication.HashPasswordForStoringInConfigFile(客戶資料.密碼, "SHA1");
                 repo.Add(客戶資料);
                 repo.UnitOfWork.Commit();
                 //db.客戶資料.Add(客戶資料);
@@ -94,10 +96,10 @@ namespace MVC5WebWork.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id,FormCollection form)
+        public ActionResult Edit(int id, FormCollection form)
         {
             var data = repo.Find(id);
-            if(TryUpdateModel(data,new string[] { "Id", "客戶名稱", "統一編號", "電話", "傳真", "地址", "Email" }))
+            if (TryUpdateModel(data, new string[] { "密碼", "電話", "傳真", "地址", "Email" }))
             {
                 repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
@@ -156,6 +158,31 @@ namespace MVC5WebWork.Controllers
                 data = data.Where(p => p.客戶名稱.Contains(search));
             }
             return View(data.ToList());
+        }
+
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginVM loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                FormsAuthentication.RedirectFromLoginPage(loginVM.帳號, false);
+                return RedirectToAction("Index");
+            }
+
+            return View(loginVM);
+        }
+
+        [HttpPost]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
 
         //protected override void Dispose(bool disposing)

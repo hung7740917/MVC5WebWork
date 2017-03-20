@@ -20,6 +20,28 @@ namespace MVC5WebWork.Models
         {
             entity.IsDelete = true;
         }
+
+        public string LoginCheck(string account, string password)
+        {
+
+            var data = this.All().FirstOrDefault(p => p.帳號 == account);
+            if (data != null)
+            {
+                if (data.密碼 == password)
+                {
+                    return "確認OK";
+                }
+                else
+                {
+                    return "密碼輸入錯誤";
+                }
+            }
+            else
+            {
+                return "查無此帳號";
+            }
+
+        }
     }
 
 	public  interface I客戶資料Repository : IRepository<客戶資料>

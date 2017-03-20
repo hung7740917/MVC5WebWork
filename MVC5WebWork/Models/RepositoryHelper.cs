@@ -62,19 +62,5 @@ namespace MVC5WebWork.Models
 			repository.UnitOfWork = unitOfWork;
 			return repository;
 		}		
-
-		public static 會員資料Repository Get會員資料Repository()
-		{
-			var repository = new 會員資料Repository();
-			repository.UnitOfWork = GetUnitOfWork();
-			return repository;
-		}
-
-		public static 會員資料Repository Get會員資料Repository(IUnitOfWork unitOfWork)
-		{
-			var repository = new 會員資料Repository();
-			repository.UnitOfWork = unitOfWork;
-			return repository;
-		}		
 	}
 }

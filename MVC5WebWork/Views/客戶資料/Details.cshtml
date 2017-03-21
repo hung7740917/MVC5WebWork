@@ -59,6 +59,9 @@
         </dd>
 
     </dl>
+
+    <hr />
+    @Html.Action("聯絡人Details", "客戶資料", new { id = Model.Id })
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

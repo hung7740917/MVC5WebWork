@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MVC5WebWork.Models.客戶聯絡人>
+
+@{
+    Layout = "";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.職稱)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.姓名)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.手機)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.電話)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.客戶資料.帳號)
+            </th>
+        </tr>
+        @{
+            var 聯絡人data = Model.ToArray();
+        }
+        @for (int i = 0; i < 聯絡人data.Length; i++)
+        {
+            @Html.HiddenFor(modelItem => 聯絡人data[i].Id)
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].職稱)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].職稱)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].姓名)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].姓名)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].Email)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].Email)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].手機)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].手機)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].電話)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].電話)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => 聯絡人data[i].客戶資料.帳號)
+                    @Html.ValidationMessageFor(modelItem => 聯絡人data[i].客戶資料.帳號)
+                </td>
+            </tr>
+            @Html.HiddenFor(modelItem => 聯絡人data[i].客戶Id)
+            @Html.HiddenFor(modelItem => 聯絡人data[i].IsDelete)
+        }
+    </table>
+    <input type="submit" value="更新" />
+            }

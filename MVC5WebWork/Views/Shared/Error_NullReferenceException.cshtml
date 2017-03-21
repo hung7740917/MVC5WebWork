@@ -1,0 +1,18 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    var ex = Model.Exception as NullReferenceException;
+}
+
+<h1 class="text-danger">資料發生錯誤，接收到NULL值</h1>
+<h2 class="text-danger">錯誤訊息如下</h2>
+
+<ul>
+    <li>
+        @ex.Message
+    </li>
+    <li>
+        @ex.ToString()
+    </li>
+</ul>

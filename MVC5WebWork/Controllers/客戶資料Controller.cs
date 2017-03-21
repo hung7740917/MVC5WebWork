@@ -10,9 +10,11 @@ using MVC5WebWork.Models;
 using PagedList;
 using System.Web.Security;
 using ClosedXML.Excel;
+using MVC5WebWork.ActionFilter;
 
 namespace MVC5WebWork.Controllers
 {
+    [紀錄執行時間]
     public class 客戶資料Controller : Controller
     {
         //private 客戶資料Entities db = new 客戶資料Entities();
@@ -78,6 +80,40 @@ namespace MVC5WebWork.Controllers
                 return HttpNotFound();
             }
             return View(客戶資料);
+        }
+
+        [HttpPost]
+        [HandleError(View = "Error_NullReferenceException", ExceptionType = typeof(NullReferenceException))]
+        public ActionResult Details(客戶資料[] 聯絡人data)
+        {
+            客戶聯絡人Repository 聯絡人repo = RepositoryHelper.Get客戶聯絡人Repository();
+            if (ModelState.IsValid)
+            {
+                foreach (var item in 聯絡人data)
+                {
+                    //    var oldData = 聯絡人repo.Find(item.Id);
+                    //    oldData.職稱 = item.職稱;
+                    //    oldData.手機 = item.手機;
+                    //    oldData.電話 = item.電話;
+                }
+                //聯絡人repo.UnitOfWork.Commit();
+                return View();
+            }
+
+
+            return View();
+        }
+
+        public ActionResult 聯絡人Details(int id)
+        {
+            var data = repo.Find(id);
+
+            if (data == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(data.客戶聯絡人);
         }
 
         // GET: 客戶資料/Create
@@ -165,7 +201,6 @@ namespace MVC5WebWork.Controllers
             }
             return View(客戶資料);
         }
-
         // POST: 客戶資料/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

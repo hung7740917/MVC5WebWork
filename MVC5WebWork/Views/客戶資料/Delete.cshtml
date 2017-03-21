@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Delete";
 }
-
+@section breadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index","客戶資料")">客戶資料</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    <li><a href="#">刪除客戶資料</a></li>
+}
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -65,7 +72,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }

@@ -231,6 +231,10 @@ namespace MVC5WebWork.Controllers
 
         public ActionResult Login()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 

@@ -22,12 +22,13 @@ namespace MVC5WebWork.Models
             var 客戶聯絡人 = this.All().Include(客 => 客.客戶資料).AsQueryable();
             //var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
 
+            客戶聯絡人 = this.SortBy(SortBy);
+
             if (!String.IsNullOrEmpty(search))
             {
                 客戶聯絡人 = 客戶聯絡人.Where(p => p.姓名.Contains(search));
             }
 
-            客戶聯絡人 = this.SortBy(SortBy);
 
             return 客戶聯絡人;
         }

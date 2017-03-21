@@ -26,5 +26,10 @@ namespace MVC5WebWork.Controllers
 
             return View();
         }
+
+        public ActionResult NewPage()
+        {
+            return View();
+        }
     }
 }

@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "客戶聯絡人管理";
 }
-
+@section breadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index","客戶聯絡人")">客戶聯絡人</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    @*<li><a href="#">新增客戶聯絡人</a></li>*@
+}
 <h2>客戶聯絡人管理</h2>
 
 <p>
@@ -13,7 +20,7 @@
 
 <form>
     @Html.TextBox("search")
-    <input type="submit" value="搜尋" class="btn btn-info" />
+    <input type="submit" value="搜尋" class="btn btn-primary" />
 </form>
 
 <br />

@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@section breadcrumb{
+    <li>
+        <i class="icon-home"></i>
+        <a href="@Url.Action("Index","客戶聯絡人")">客戶聯絡人</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    <li><a href="#">編輯客戶聯絡人</a></li>
+}
 <h2>Edit</h2>
 
 
@@ -67,7 +74,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
@@ -77,6 +84,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

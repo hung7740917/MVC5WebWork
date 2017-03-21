@@ -21,12 +21,13 @@ namespace MVC5WebWork.Models
         {
             var 客戶銀行資訊 = this.All().Include(客 => 客.客戶資料);
 
+            客戶銀行資訊 = this.SortBy(SortBy);
+
             if (!String.IsNullOrEmpty(search))
             {
                 客戶銀行資訊 = 客戶銀行資訊.Where(p => p.帳戶名稱.Contains(search));
             }
 
-            客戶銀行資訊 = this.SortBy(SortBy);
 
             return 客戶銀行資訊;
         }

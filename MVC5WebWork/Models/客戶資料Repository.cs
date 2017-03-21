@@ -20,12 +20,13 @@ namespace MVC5WebWork.Models
         {
             var data = this.All().AsQueryable();
 
+            data = this.SortBy(SortBy);
+
             if (!String.IsNullOrEmpty(search))
             {
                 data = data.Where(p => p.客戶名稱.Contains(search));
             }
 
-            data = this.SortBy(SortBy);
 
             return data;
         }

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "客戶聯絡人管理";
+    var 職稱ddl = ViewBag.職稱DropDownList as List<GroupedSelectListItem>;
 }
 @section breadcrumb{
     <li>
@@ -22,6 +23,8 @@
     @Html.TextBox("search")
     <input type="submit" value="搜尋" class="btn btn-primary" />
 </form>
+
+@Html.DropDownGroupList("職稱DropDownList", 職稱ddl,"請選擇篩選職稱")
 
 <br />
 

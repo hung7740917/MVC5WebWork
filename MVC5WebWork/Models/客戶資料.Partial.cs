@@ -3,12 +3,23 @@ namespace MVC5WebWork.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     [MetadataType(typeof(客戶資料MetaData))]
-    public partial class 客戶資料
+    public partial class 客戶資料 : IValidatableObject
     {
+        客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (repo.AccountCheck(this.帳號,this.Id))
+            {
+                yield return new ValidationResult("此帳號已存在", new string[] { "帳號" });
+                yield break;
+            }
+            yield return ValidationResult.Success;
+        }
     }
-    
+
     public partial class 客戶資料MetaData
     {
         [Required]

@@ -82,28 +82,6 @@ namespace MVC5WebWork.Controllers
             return View(客戶資料);
         }
 
-        [HttpPost]
-        [HandleError(View = "Error_NullReferenceException", ExceptionType = typeof(NullReferenceException))]
-        public ActionResult Details(客戶資料[] 聯絡人data)
-        {
-            客戶聯絡人Repository 聯絡人repo = RepositoryHelper.Get客戶聯絡人Repository();
-            if (ModelState.IsValid)
-            {
-                foreach (var item in 聯絡人data)
-                {
-                    //    var oldData = 聯絡人repo.Find(item.Id);
-                    //    oldData.職稱 = item.職稱;
-                    //    oldData.手機 = item.手機;
-                    //    oldData.電話 = item.電話;
-                }
-                //聯絡人repo.UnitOfWork.Commit();
-                return View();
-            }
-
-
-            return View();
-        }
-
         public ActionResult 聯絡人Details(int id)
         {
             var data = repo.Find(id);
@@ -114,6 +92,29 @@ namespace MVC5WebWork.Controllers
             }
 
             return View(data.客戶聯絡人);
+        }
+
+        [HttpPost]
+        [HandleError(View = "Error_NullReferenceException", ExceptionType = typeof(NullReferenceException))]
+        public ActionResult 聯絡人Details(int id, 客戶聯絡人[] 聯絡人data)
+        {
+            客戶聯絡人Repository 聯絡人repo = RepositoryHelper.Get客戶聯絡人Repository();
+            if (ModelState.IsValid)
+            {
+                foreach (var item in 聯絡人data)
+                {
+                    var oldData = 聯絡人repo.Find(item.Id);
+                    oldData.職稱 = item.職稱;
+                    oldData.手機 = item.手機;
+                    oldData.電話 = item.電話;
+                }
+                聯絡人repo.UnitOfWork.Commit();
+
+                return RedirectToAction("Details", new { id = id });
+            }
+
+            var data = repo.Find(id);
+            return View("Details", data);
         }
 
         // GET: 客戶資料/Create
@@ -156,6 +157,11 @@ namespace MVC5WebWork.Controllers
             if (客戶資料 == null)
             {
                 return HttpNotFound();
+            }
+
+            if(客戶資料.帳號 != User.Identity.Name)
+            {
+                return RedirectToAction("Index");
             }
             return View(客戶資料);
         }

@@ -24,6 +24,17 @@ namespace MVC5WebWork.Controllers
         {
             var 客戶聯絡人 = 客戶聯絡人repo.Get篩選後客戶聯絡人(SortBy, search);
 
+            var items = new List<GroupedSelectListItem>();
+            foreach (var item in 客戶聯絡人)
+            {
+                items.Add(new GroupedSelectListItem()
+                {
+                    Value = item.職稱,
+                    Text = string.Format("{0}", item.職稱)
+                });
+            }
+            ViewBag.職稱DropDownList = items;
+
             return View(客戶聯絡人.ToPagedList(PageNo, 10));
         }
 

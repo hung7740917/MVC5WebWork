@@ -85,6 +85,16 @@ namespace MVC5WebWork.Models
             }
         }
 
+        public bool AccountCheck(string 帳號,int id)
+        {
+            var data = this.All().FirstOrDefault(p => p.帳號 == 帳號);
+            if(data != null && data.Id != id)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public string LoginCheck(string account, string password)
         {
 

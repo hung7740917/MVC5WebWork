@@ -4,7 +4,7 @@
     Layout = "";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("聯絡人Details","客戶資料"))
 {
     <table class="table">
         <tr>
@@ -23,9 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.電話)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.客戶資料.帳號)
-            </th>
+            </th>*@
         </tr>
         @{
             var 聯絡人data = Model.ToArray();
@@ -39,11 +39,11 @@
                     @Html.ValidationMessageFor(modelItem => 聯絡人data[i].職稱)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => 聯絡人data[i].姓名)
+                    @Html.EditorFor(modelItem => 聯絡人data[i].姓名, new { htmlAttributes = new { @class = "disabled", @disabled = "" } })
                     @Html.ValidationMessageFor(modelItem => 聯絡人data[i].姓名)
                 </td>
                 <td>
-                    @Html.EditorFor(modelItem => 聯絡人data[i].Email)
+                    @Html.EditorFor(modelItem => 聯絡人data[i].Email, new { htmlAttributes = new { @class = "disabled", @disabled = "" } })
                     @Html.ValidationMessageFor(modelItem => 聯絡人data[i].Email)
                 </td>
                 <td>
@@ -54,10 +54,10 @@
                     @Html.EditorFor(modelItem => 聯絡人data[i].電話)
                     @Html.ValidationMessageFor(modelItem => 聯絡人data[i].電話)
                 </td>
-                <td>
+                @*<td>
                     @Html.EditorFor(modelItem => 聯絡人data[i].客戶資料.帳號)
                     @Html.ValidationMessageFor(modelItem => 聯絡人data[i].客戶資料.帳號)
-                </td>
+                </td>*@
             </tr>
             @Html.HiddenFor(modelItem => 聯絡人data[i].客戶Id)
             @Html.HiddenFor(modelItem => 聯絡人data[i].IsDelete)
